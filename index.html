@@ -1,13 +1,165 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Steganography</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="#home" class="logo">StegaWeb</a>
+            <div class="nav-links">
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact Us</a>
+                <button id="auth-button" class="btn">Sign In with Google</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Landing Page Section -->
+        <section id="home" class="page">
+            <h1>Universal Steganography</h1>
+            <p>The ultimate tool for hiding messages in text, images, audio, and video.</p>
+            <button id="get-started-button" class="btn btn-primary">Get Started</button>
+        </section>
+
+        <!-- Main App Workspace Section (hidden by default) -->
+        <section id="app" class="page" style="display: none;">
+            <div class="tabs">
+                <button class="tab-link active" data-tab="text">Text</button>
+                <button class="tab-link" data-tab="image">Image</button>
+                <button class="tab-link" data-tab="audio">Audio</button>
+                <button class="tab-link" data-tab="video">Video</button>
+            </div>
+
+            <!-- Text Tool -->
+            <div id="text-tool" class="tab-content active">
+                <h2>Text Steganography</h2>
+                <div class="tool-container">
+                    <div class="tool-section">
+                        <h3>Encode</h3>
+                        <textarea id="text-encode-cover" placeholder="Cover Text (Optional)"></textarea>
+                        <textarea id="text-encode-secret" placeholder="Secret Message" required></textarea>
+                        <input type="password" id="text-encode-password" placeholder="Password (Optional)">
+                        <button id="text-encode-button" class="btn">Encode</button>
+                        <textarea id="text-encode-result" readonly placeholder="Result"></textarea>
+                    </div>
+                    <div class="tool-section">
+                        <h3>Decode</h3>
+                        <textarea id="text-decode-stego" placeholder="Steganographic Text" required></textarea>
+                        <input type="password" id="text-decode-password" placeholder="Password (if used)">
+                        <button id="text-decode-button" class="btn">Decode</button>
+                        <textarea id="text-decode-result" readonly placeholder="Decoded Message"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Tool -->
+            <div id="image-tool" class="tab-content">
+                <h2>Image Steganography</h2>
+                <div class="tool-container">
+                    <div class="tool-section">
+                        <h3>Encode</h3>
+                        <label>Upload Image:</label>
+                        <input type="file" id="image-encode-input" accept="image/*">
+                        <img id="image-encode-preview" class="preview" alt="Image Preview">
+                        <textarea id="image-encode-secret" placeholder="Secret Message"></textarea>
+                        <input type="password" id="image-encode-password" placeholder="Password (Optional)">
+                        <button id="image-encode-button" class="btn">Encode Image</button>
+                        <a id="image-download-link" class="btn" style="display:none;">Download Encoded Image</a>
+                    </div>
+                    <div class="tool-section">
+                        <h3>Decode</h3>
+                        <label>Upload Encoded Image:</label>
+                        <input type="file" id="image-decode-input" accept="image/png,image/bmp">
+                        <img id="image-decode-preview" class="preview" alt="Image Preview">
+                        <input type="password" id="image-decode-password" placeholder="Password (if used)">
+                        <button id="image-decode-button" class="btn">Decode Image</button>
+                        <textarea id="image-decode-result" readonly placeholder="Decoded Message"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio Tool -->
+            <div id="audio-tool" class="tab-content">
+                <h2>Audio Steganography</h2>
+                <div class="tool-container">
+                    <div class="tool-section">
+                        <h3>Encode</h3>
+                        <label>Upload Audio:</label>
+                        <input type="file" id="audio-encode-input" accept="audio/*">
+                        <textarea id="audio-encode-secret" placeholder="Secret Message"></textarea>
+                        <input type="password" id="audio-encode-password" placeholder="Password (Optional)">
+                        <button id="audio-encode-button" class="btn">Encode Audio</button>
+                        <a id="audio-download-link" class="btn" style="display:none;">Download Encoded WAV</a>
+                    </div>
+                    <div class="tool-section">
+                        <h3>Decode</h3>
+                        <label>Upload Encoded WAV:</label>
+                        <input type="file" id="audio-decode-input" accept="audio/wav,audio/wave">
+                        <input type="password" id="audio-decode-password" placeholder="Password (if used)">
+                        <button id="audio-decode-button" class="btn">Decode Audio</button>
+                        <textarea id="audio-decode-result" readonly placeholder="Decoded Message"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Tool -->
+            <div id="video-tool" class="tab-content">
+                 <h2>Video Steganography (Experimental)</h2>
+                <div class="tool-container">
+                    <div class="tool-section">
+                        <h3>Encode</h3>
+                        <label>Upload Video:</label>
+                        <input type="file" id="video-encode-input" accept="video/*">
+                        <textarea id="video-encode-secret" placeholder="Secret Message"></textarea>
+                        <input type="password" id="video-encode-password" placeholder="Password (Optional)">
+                        <button id="video-encode-button" class="btn">Encode Video</button>
+                        <a id="video-download-link" class="btn" style="display:none;">Download Encoded WEBM</a>
+                    </div>
+                    <div class="tool-section">
+                        <h3>Decode</h3>
+                        <label>Upload Encoded Video:</label>
+                        <input type="file" id="video-decode-input" accept="video/webm">
+                        <input type="password" id="video-decode-password" placeholder="Password (if used)">
+                        <button id="video-decode-button" class="btn">Decode Video</button>
+                        <textarea id="video-decode-result" readonly placeholder="Decoded Message"></textarea>
+                    </div>
+                </div>
+                <video id="video-player" class="hidden" muted playsinline></video>
+                <canvas id="video-canvas" class="hidden"></canvas>
+            </div>
+
+        </section>
+
+        <!-- About Page Section -->
+        <section id="about" class="page" style="display: none;">
+            <h2>About Us</h2>
+            <p>This website provides a set of universal steganography tools designed with a privacy-first approach.</p>
+        </section>
+
+        <!-- Contact Page Section -->
+        <section id="contact" class="page" style="display: none;">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <input type="text" id="contact-name" placeholder="Your Name" required>
+                <input type="text" id="contact-subject" placeholder="Subject" required>
+                <textarea id="contact-message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 StegaWeb. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Firebase and App Scripts -->
+    <script src="firebase.js" type="module"></script>
+    <script src="app.js" type="module"></script>
+</body>
 </html>

@@ -1,11 +1,12 @@
-# Universal Steganography Website
+# Universal Steganography Website (Vanilla JS Version)
 
-This project is a responsive, accessible web application that allows users to hide (encode) and retrieve (decode) secret messages using text, image, and audio steganography. It also includes an experimental implementation for video steganography.
+This project is a responsive, accessible web application that allows users to hide (encode) and retrieve (decode) secret messages using text, image, audio, and video steganography.
 
-The application prioritizes user privacy by performing all encoding and decoding operations client-side in the browser. It uses Firebase for Google Sign-In and features a clean, modern UI with options to preview, download, and copy data.
+This version of the application is built entirely with plain HTML, CSS, and JavaScript, with no external build tools or frameworks required. It prioritizes user privacy by performing all encoding and decoding operations client-side in the browser. It uses Firebase for Google Sign-In.
 
 ## Features
 
+- **Zero Dependencies:** Runs in any modern web browser without any installation or build steps.
 - **Client-Side Processing:** All steganography and encryption operations happen in your browser. Your files and secret messages are never uploaded to a server.
 - **Google Sign-In:** Secure authentication and session management handled by Firebase Authentication.
 - **Text Steganography:** Hide messages in text using invisible zero-width characters.
@@ -16,55 +17,42 @@ The application prioritizes user privacy by performing all encoding and decoding
 
 ## Tech Stack
 
-- **Frontend:** React, TypeScript, Vite
-- **Styling:** Tailwind CSS
-- **Authentication:** Firebase
-- **Testing:** Vitest
+-   **HTML5**
+-   **CSS3** (Flexbox & Grid for layout)
+-   **Vanilla JavaScript** (ES Modules)
+-   **Firebase** (via CDN import)
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js and npm
-- A Firebase project
+- A modern web browser.
+- A Firebase project.
 
-### Installation & Setup
+### Running the Application
 
-1.  **Clone the repository:**
-    ```bash
-    git clone <repository-url>
-    cd <repository-directory>
-    ```
-
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-
-3.  **Configure Firebase:**
-    - Open the file `src/firebase.ts`.
+1.  **Clone the repository or download the files.**
+2.  **Configure Firebase:**
+    - Open the file `firebase.js`.
     - Replace the placeholder `firebaseConfig` object with your own Firebase project configuration. You can get this from the Firebase console.
+3.  **Open `index.html`:**
+    - Simply open the `index.html` file in your web browser. Due to browser security policies around ES Modules (`import`/`export`), you may need to serve the files from a simple local server. You can do this easily with Python or a VS Code extension:
 
-4.  **Run the development server:**
+    **Using Python:**
     ```bash
-    npm run dev
+    # If you have Python 3
+    python -m http.server
     ```
-    The application should now be running on `http://localhost:5173` (or another port if 5173 is busy).
+    Then navigate to `http://localhost:8000` in your browser.
 
-### Build for Production
-
-To create a static build of the application, run:
-
-```bash
-npm run build
-```
-This will create a `dist` directory with the optimized production assets.
+    **Using VS Code:**
+    - Install the "Live Server" extension.
+    - Right-click on `index.html` and choose "Open with Live Server".
 
 ## Project Structure
 
--   `src/components`: Contains all React components, including the main `Header` and the steganography tools (`TextTool`, `ImageTool`, etc.).
--   `src/contexts`: Houses React contexts, such as `AuthContext` for managing user authentication state.
--   `src/lib`: Contains the core logic for cryptography (`crypto.ts`) and the various steganography methods.
--   `src/pages`: Contains the main page components for routing, such as `Home`, `About`, `Contact`, and the main `AppLayout`.
--   `src/firebase.ts`: The configuration file for Firebase services.
--   `vite.config.ts`: The configuration for the Vite build tool and Vitest.
+-   `index.html`: The main and only HTML file, containing the structure for the entire application.
+-   `style.css`: Contains all CSS styles for the application.
+-   `app.js`: The main JavaScript file that controls all UI interactivity, navigation, and event handling.
+-   `firebase.js`: The configuration and initialization for Firebase services.
+-   `lib/`: A directory containing the standalone JavaScript modules for cryptography and the various steganography methods.
